@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/poll-backend-e2e"
+    },
+    {
+      "path": "./apps/poll-backend"
+    },
+    {
+      "path": "./apps/poll-spa-e2e"
+    },
+    {
+      "path": "./apps/poll-spa"
+    }
+  ]
+}
