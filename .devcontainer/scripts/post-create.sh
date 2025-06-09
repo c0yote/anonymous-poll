@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change cache to avoid filling devcontainer storage
-npm config set cache /workspaces/hashbrown/.npm-cache
+npm config set cache /workspaces/anonymous-poll/.npm-cache
 
 # Install Correct Node Version
 # nvm install

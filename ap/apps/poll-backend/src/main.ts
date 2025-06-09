@@ -1,14 +1,36 @@
 import express from 'express';
+import { setupDatabase } from './database';
 
-const host = process.env.HOST ?? 'localhost';
+const host = process.env.HOST ?? '0.0.0.0';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-const app = express();
+const start = async () => {
+  const app = express();
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
-});
+  const db = await setupDatabase();
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
-});
+  app.get('/api/poll/:id', (req, res) => {
+    const poll = db.data.polls.find((poll) => poll.id === req.params.id);
+
+    console.log('poll', poll);
+
+    res.send({
+      title: 'Poll 13',
+      description: 'This is a poll',
+    });
+  });
+
+  app.listen(port, host, () => {
+    console.log(`[ ready ] http://${host}:${port}`);
+  });
+};
+
+const main = async () => {
+  start().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+};
+
+main();
+console.log('Bye! 👋');

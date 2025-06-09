@@ -7,11 +7,18 @@ export default defineConfig(() => ({
   cacheDir: '../../node_modules/.vite/apps/poll-spa',
   server: {
     port: 4200,
-    host: 'localhost',
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   preview: {
     port: 4300,
-    host: 'localhost',
+    host: '0.0.0.0',
   },
   plugins: [vue()],
   // Uncomment this if you are using workers.
