@@ -4,8 +4,78 @@ import { useRoute } from 'vue-router';
 import axios from 'axios';
 import DeltaCard from './DeltaCard.vue';
 
+const mockSeries = [
+  {
+    category: 'Clarity',
+    score: 8.5,
+    scoreTrend: 0.3,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 8,
+    neutralPercentage: 22,
+    favorablePercentage: 70,
+  },
+  {
+    category: 'Energy',
+    score: 72,
+    scoreTrend: 0.2,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 15,
+    neutralPercentage: 35,
+    favorablePercentage: 50,
+  },
+  {
+    category: 'Psychological Safety',
+    score: 9.2,
+    scoreTrend: -0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 3,
+    neutralPercentage: 15,
+    favorablePercentage: 82,
+  },
+  {
+    category: 'Work-life Balance',
+    score: 6.5,
+    scoreTrend: -0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 20,
+    neutralPercentage: 40,
+    favorablePercentage: 40,
+  },
+  {
+    category: 'Confidence',
+    score: 7.8,
+    scoreTrend: 0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 12,
+    neutralPercentage: 25,
+    favorablePercentage: 63,
+  },
+  {
+    category: 'Efficiency',
+    score: 8.8,
+    scoreTrend: 0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 5,
+    neutralPercentage: 18,
+    favorablePercentage: 77,
+  },
+];
+
 const route = useRoute();
 const series = ref<{ title: string; description: string } | null>(null);
+const mockResults = ref<DeltaResult[]>(mockSeries);
 const loading = ref(true);
 const error = ref<string | null>(null);
 
@@ -36,7 +106,7 @@ onMounted(async () => {
       {{ error }}
     </div>
     <div v-else>
-      <DeltaCard />
+      <DeltaCard :series="mockResults" />
     </div>
   </div>
 </template>
