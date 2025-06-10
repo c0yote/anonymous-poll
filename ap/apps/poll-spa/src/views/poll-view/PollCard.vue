@@ -11,7 +11,10 @@ import Button from '../../shared/Button.vue';
 import CardFooter from '../../shared/CardFooter.vue';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
+import axios from 'axios';
 import * as z from 'zod';
+import { useRoute } from 'vue-router';
+
 import {
   FormControl,
   FormDescription,
@@ -26,6 +29,7 @@ defineProps<{
   description: string;
 }>();
 
+const route = useRoute();
 const formSchema = toTypedSchema(
   z.object({
     clarity: z.coerce.number().min(1).max(10).nullable(),
@@ -49,8 +53,20 @@ const form = useForm({
   },
 });
 
-const onSubmit = form.handleSubmit((values) => {
-  console.log('Form Submitted', values);
+const onSubmit = form.handleSubmit(async (values) => {
+  try {
+
+  const submitObject = {
+    submissionId :"firstSubmissionId-1234",
+    pollId : route.params.id,
+    ...values
+  }
+  const response = await axios.post(`/api/submitForm`, submitObject);
+  console.log("Submit form posted", response)
+  } catch(error) {
+    console.log("Error occcured while submitting the form",error);
+  }
+
 });
 </script>
 
