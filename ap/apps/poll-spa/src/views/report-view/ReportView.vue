@@ -106,7 +106,7 @@ onMounted(async () => {
       {{ error }}
     </div>
     <div v-else>
-      <DeltaCard :series="mockResults" />
+      <DeltaCard :results="mockResults" />
     </div>
   </div>
 </template>

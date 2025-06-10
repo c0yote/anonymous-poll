@@ -11,27 +11,17 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import DeltaRow from './DeltaRow.vue';
 import Separator from '../../shared/Separator.vue';
+import { DeltaResult } from '@ap/shared-types';
 
 const props = defineProps<{
   series: any; // TODO: Get series type
+  results: DeltaResult[];
   polls: any[]; // TODO: Get poll type
 }>();
 
 const polls = ref(props.polls);
 const error = ref<string | null>(null);
 const loading = ref(false);
-
-interface DeltaResult {
-  category: string;
-  score: number;
-  scoreTrend: number;
-  unfavorableTrend: number;
-  neutralTrend: number;
-  favorableTrend: number;
-  unfavorablePercentage: number;
-  neutralPercentage: number;
-  favorablePercentage: number;
-}
 
 const onNewPoll = async () => {
   const date = new Date().toLocaleDateString('en-US', {
@@ -70,7 +60,7 @@ const onNewPoll = async () => {
     </CardHeader>
     <CardContent>
       <div class="flex flex-col gap-2">
-        <div v-for="result in series" :key="result.category">
+        <div v-for="result in results" :key="result.category">
           <DeltaRow
             :category="result.category"
             :score="Number(result.score)"
