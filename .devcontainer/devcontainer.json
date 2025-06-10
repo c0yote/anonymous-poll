@@ -1,16 +1,19 @@
-
 {
-    "name": "Node.js & TypeScript",
-    "dockerFile": "Dockerfile",
-    "customizations": {
-      "vscode": {
-        "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "jcbuisson.vue"]
-      }
-    },
-    "mounts": [
-      "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
-    ],
-    "postCreateCommand": ".devcontainer/scripts/post-create.sh",
-    "forwardPorts": []
-  }
-  
+  "name": "Node.js & TypeScript",
+  "dockerFile": "Dockerfile",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "vue.volar",
+        "ms-vsliveshare.vsl"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": ".devcontainer/scripts/post-create.sh",
+  "forwardPorts": []
+}
