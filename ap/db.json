@@ -3,8 +3,41 @@
   "series": [
     {
       "id": "0",
+      "name": "Wolverines",
+      "description": "Retrospective poll series for Wolverines",
       "pollIds": []
     }
   ],
-  "polls": []
+  "polls": [
+    {
+      "title": "June 9, 2025 - Wolverines",
+      "description": "Retrospective poll for Wolverines on June 9, 2025",
+      "seriesId": "0",
+      "id": "01JXBRSZA4GMSVD90JQCYYAGMX"
+    },
+    {
+      "title": "June 9, 2025 - Wolverines",
+      "description": "Retrospective poll for Wolverines on June 9, 2025",
+      "seriesId": "0",
+      "id": "01JXBRVXN8B4464V2N915D475B"
+    },
+    {
+      "title": "June 9, 2025 - Wolverines",
+      "description": "Retrospective poll for Wolverines on June 9, 2025",
+      "seriesId": "0",
+      "id": "01JXBRVZVBJYAH1X3QT47FA9K1"
+    },
+    {
+      "title": "June 9, 2025 - Wolverines",
+      "description": "Retrospective poll for Wolverines on June 9, 2025",
+      "seriesId": "0",
+      "id": "01JXBRXXKD9TPRX4GJEEPR6DFG"
+    },
+    {
+      "title": "June 9, 2025 - Wolverines",
+      "description": "Retrospective poll for Wolverines on June 9, 2025",
+      "seriesId": "0",
+      "id": "01JXBS32BBFD37V5Q1V2A8CTW0"
+    }
+  ]
 }

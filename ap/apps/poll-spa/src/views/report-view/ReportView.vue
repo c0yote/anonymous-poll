@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
-import SeriesCard from './SeriesCard.vue';
+import DeltaCard from './DeltaCard.vue';
 
 const route = useRoute();
 const series = ref<{ title: string; description: string } | null>(null);
@@ -36,7 +36,7 @@ onMounted(async () => {
       {{ error }}
     </div>
     <div v-else>
-      <SeriesCard :key="series.id" :series="series" :polls="series.polls" />
+      <DeltaCard />
     </div>
   </div>
 </template>

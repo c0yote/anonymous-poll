@@ -12,6 +12,8 @@ export interface PollSchema {
 
 export interface SeriesSchema {
   id: string;
+  name: string;
+  description: string;
   pollIds: string[];
 }
 
@@ -42,7 +44,9 @@ export async function setupDatabase() {
     submissions: [],
     series: [
       {
-        id: '1',
+        id: '0',
+        name: 'Wolverines',
+        description: 'Retrospective poll series for Wolverines',
         pollIds: [],
       },
     ],

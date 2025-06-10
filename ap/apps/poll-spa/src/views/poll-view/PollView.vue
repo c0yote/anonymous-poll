@@ -26,9 +26,6 @@ onMounted(async () => {
     loading.value = false;
   }
 });
-
-console.log(loading.value);
-console.log(error.value);
 </script>
 
 <template>

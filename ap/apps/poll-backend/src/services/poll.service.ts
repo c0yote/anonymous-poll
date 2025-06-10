@@ -1,15 +1,29 @@
 import { Low } from 'lowdb';
-import { Schema } from '../database.js';
+import { PollSchema, Schema } from '../database.js';
 import { RecordNotFoundError } from './errors.js';
 import { Poll } from '../models/poll.model.js';
 import { Submission } from '../models/submission.model.js';
 import { SubmissionService } from './submission.services.js';
+import { ulid } from 'ulid';
 
 export class PollService {
   constructor(
     private readonly db: Low<Schema>,
     private readonly submissionService: SubmissionService
   ) {}
+
+  async createPoll(poll: PollSchema): Promise<Poll> {
+    const newPoll = {
+      ...poll,
+      id: ulid(),
+    };
+
+    await this.db.data.polls.push(newPoll);
+
+    await this.db.write();
+
+    return this.getPollById(newPoll.id);
+  }
 
   private async getSubmissionsForPoll(pollId: string): Promise<Submission[]> {
     const submissions = this.submissionService.getSubmissionsByPollId(pollId);

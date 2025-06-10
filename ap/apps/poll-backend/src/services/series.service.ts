@@ -19,6 +19,8 @@ export class SeriesService {
 
     return {
       id: series.id,
+      name: series.name,
+      description: series.description,
       polls: await this.pollService.getPollsbySeriesId(series.id),
     };
   }
