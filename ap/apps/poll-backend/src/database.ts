@@ -1,26 +1,55 @@
-interface Schema {
-    responses: {
-        id: string;
-        pollId: string;
-        answers: Record<string, number>;
-    }[];
-    series: {
-        id: string;
-        teamId: string;
-        responseIds: string[];
-    }[];
-    polls: {
-        id: string;
-        title: string;
-        description: string;
-    }[];
-    teams: {
-        id: string;
-        name: string;
-    }[];
+import { Poll } from './models/poll.model.js';
+import { Series } from './models/series.model.js';
+import { Submission } from './models/submission.model.js';
+
+export interface PollSchema {
+  id: string;
+  seriesId: string;
+  title: string;
+  description: string;
+  submissionIds: string[];
+}
+
+export interface SeriesSchema {
+  id: string;
+  pollIds: string[];
+}
+
+export interface SubmissionResponseSchema {
+  clarity: number;
+  energy: number;
+  psychologicalSafety: number;
+  workLifeBalance: number;
+  confidence: number;
+  efficiency: number;
+}
+
+export interface SubmissionSchema {
+  id: string;
+  pollId: string;
+  responses: SubmissionResponseSchema;
+}
+
+export interface Schema {
+  submissions: SubmissionSchema[];
+  series: SeriesSchema[];
+  polls: PollSchema[];
 }
 
 export async function setupDatabase() {
-    const { JSONFilePreset } = await import('lowdb/node');
-    return await JSONFilePreset<Schema>('db.json', {responses: [], series: [], teams: [], polls: []});
+  const { JSONFilePreset } = await import('lowdb/node');
+  const db = await JSONFilePreset<Schema>('db.json', {
+    submissions: [],
+    series: [
+      {
+        id: '1',
+        pollIds: [],
+      },
+    ],
+    polls: [],
+  });
+
+  db.write();
+
+  return db;
 }
