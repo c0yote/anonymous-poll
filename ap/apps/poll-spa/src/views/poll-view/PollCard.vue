@@ -14,6 +14,7 @@ import { toTypedSchema } from '@vee-validate/zod';
 import axios from 'axios';
 import * as z from 'zod';
 import { useRoute } from 'vue-router';
+import { ulid } from 'ulid';
 
 import {
   FormControl,
@@ -57,7 +58,7 @@ const onSubmit = form.handleSubmit(async (values) => {
   try {
 
   const submitObject = {
-    submissionId :"firstSubmissionId-1234",
+    submissionId : ulid(),
     pollId : route.params.id,
     ...values
   }
