@@ -21,6 +21,87 @@ const polls = ref(props.polls);
 const error = ref<string | null>(null);
 const loading = ref(false);
 
+interface DeltaResult {
+  category: string;
+  score: number;
+  scoreTrend: number;
+  unfavorableTrend: number;
+  neutralTrend: number;
+  favorableTrend: number;
+  unfavorablePercentage: number;
+  neutralPercentage: number;
+  favorablePercentage: number;
+}
+
+const mockResult: DeltaResult[] = [
+  {
+    category: 'Clarity',
+    score: 8.5,
+    scoreTrend: 0.3,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 8,
+    neutralPercentage: 22,
+    favorablePercentage: 70,
+  },
+  {
+    category: 'Energy',
+    score: 72,
+    scoreTrend: 0.2,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 15,
+    neutralPercentage: 35,
+    favorablePercentage: 50,
+  },
+  {
+    category: 'Psychological Safety',
+    score: 9.2,
+    scoreTrend: -0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 3,
+    neutralPercentage: 15,
+    favorablePercentage: 82,
+  },
+  {
+    category: 'Work-life Balance',
+    score: 6.5,
+    scoreTrend: -0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 20,
+    neutralPercentage: 40,
+    favorablePercentage: 40,
+  },
+  {
+    category: 'Confidence',
+    score: 7.8,
+    scoreTrend: 0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 12,
+    neutralPercentage: 25,
+    favorablePercentage: 63,
+  },
+  {
+    category: 'Efficiency',
+    score: 8.8,
+    scoreTrend: 0.1,
+    unfavorableTrend: 0.1,
+    neutralTrend: 0.1,
+    favorableTrend: 0.1,
+    unfavorablePercentage: 5,
+    neutralPercentage: 18,
+    favorablePercentage: 77,
+  },
+];
+
 const onNewPoll = async () => {
   const date = new Date().toLocaleDateString('en-US', {
     month: 'long',
@@ -58,76 +139,20 @@ const onNewPoll = async () => {
     </CardHeader>
     <CardContent>
       <div class="flex flex-col gap-2">
-        <DeltaRow
-          category="Clarity"
-          :score="Number(8.5)"
-          :score-trend="Number(0.3)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(8)"
-          :neutral-percentage="Number(22)"
-          :favorable-percentage="Number(70)"
-        /><Separator class="mt-2" />
-        <DeltaRow
-          category="Energy"
-          :score="Number(72)"
-          :score-trend="Number(0.2)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(15)"
-          :neutral-percentage="Number(35)"
-          :favorable-percentage="Number(50)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Psychological Safety"
-          :score="Number(9.2)"
-          :score-trend="Number(-0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(3)"
-          :neutral-percentage="Number(15)"
-          :favorable-percentage="Number(82)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Work-life Balance"
-          :score="Number(6.5)"
-          :score-trend="Number(-0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(20)"
-          :neutral-percentage="Number(40)"
-          :favorable-percentage="Number(40)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Confidence"
-          :score="Number(7.8)"
-          :score-trend="Number(0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(-0.1)"
-          :unfavorable-percentage="Number(12)"
-          :neutral-percentage="Number(25)"
-          :favorable-percentage="Number(63)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Efficiency"
-          :score="Number(8.8)"
-          :score-trend="Number(0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(5)"
-          :neutral-percentage="Number(18)"
-          :favorable-percentage="Number(77)"
-        />
+        <div v-for="result in mockResult" :key="result.category">
+          <DeltaRow
+            :category="result.category"
+            :score="Number(result.score)"
+            :score-trend="Number(result.scoreTrend)"
+            :unfavorable-trend="Number(result.unfavorableTrend)"
+            :neutral-trend="Number(result.neutralTrend)"
+            :favorable-trend="Number(result.favorableTrend)"
+            :unfavorable-percentage="Number(result.unfavorablePercentage)"
+            :neutral-percentage="Number(result.neutralPercentage)"
+            :favorable-percentage="Number(result.favorablePercentage)"
+          />
+          <Separator class="mt-2" />
+        </div>
       </div>
     </CardContent>
   </Card>
