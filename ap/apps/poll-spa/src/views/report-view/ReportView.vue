@@ -76,7 +76,7 @@ const mockSeries: DeltaResult[] = [
 
 const route = useRoute();
 const series = ref<{ title: string; description: string } | null>(null);
-const mockResults = ref<DeltaResult[]>(mockSeries);
+const surveyResults = ref<DeltaResult[]>(mockSeries);
 const loading = ref(true);
 const error = ref<string | null>(null);
 
@@ -84,8 +84,11 @@ onMounted(async () => {
   console.log('wat');
   try {
     const response = await axios.get(`/api/series/${route.params.id}`);
+    const results = await axios.get(`/api/results/${route.params.id}`);
+
     console.log(response.data);
     series.value = response.data;
+    surveyResults.value = results.data;
   } catch (err) {
     console.dir(err);
     if (err.status === 404) {
@@ -107,7 +110,7 @@ onMounted(async () => {
       {{ error }}
     </div>
     <div v-else>
-      <DeltaCard :series="series" :results="mockResults" :polls="[]" />
+      <DeltaCard :series="series" :results="surveyResults" :polls="[]" />
     </div>
   </div>
 </template>
