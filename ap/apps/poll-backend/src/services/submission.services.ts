@@ -1,7 +1,7 @@
 import { Low } from 'lowdb';
 import { Schema } from '../database.js';
 import { RecordNotFoundError } from './errors.js';
-import { Submission, SubmissionRequest, SubmissionResponse } from '../models/submission.model.js';
+import { Submission, SubmissionRequest } from '../models/submission.model.js';
 import { ulid } from 'ulid';
 
 export class SubmissionService {
@@ -9,7 +9,6 @@ export class SubmissionService {
 
   async submitPollResponse(
     request: SubmissionRequest
-
   ): Promise<Submission> {
     try {
       const submissionData = {
