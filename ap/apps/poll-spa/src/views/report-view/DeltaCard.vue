@@ -11,9 +11,11 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import DeltaRow from './DeltaRow.vue';
 import Separator from '../../shared/Separator.vue';
+import { DeltaResult } from '@ap/shared-types';
 
 const props = defineProps<{
   series: any; // TODO: Get series type
+  results: DeltaResult[];
   polls: any[]; // TODO: Get poll type
 }>();
 
@@ -58,76 +60,20 @@ const onNewPoll = async () => {
     </CardHeader>
     <CardContent>
       <div class="flex flex-col gap-2">
-        <DeltaRow
-          category="Clarity"
-          :score="Number(8.5)"
-          :score-trend="Number(0.3)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(8)"
-          :neutral-percentage="Number(22)"
-          :favorable-percentage="Number(70)"
-        /><Separator class="mt-2" />
-        <DeltaRow
-          category="Energy"
-          :score="Number(72)"
-          :score-trend="Number(0.2)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(15)"
-          :neutral-percentage="Number(35)"
-          :favorable-percentage="Number(50)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Psychological Safety"
-          :score="Number(9.2)"
-          :score-trend="Number(-0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(3)"
-          :neutral-percentage="Number(15)"
-          :favorable-percentage="Number(82)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Work-life Balance"
-          :score="Number(6.5)"
-          :score-trend="Number(-0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(20)"
-          :neutral-percentage="Number(40)"
-          :favorable-percentage="Number(40)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Confidence"
-          :score="Number(7.8)"
-          :score-trend="Number(0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(-0.1)"
-          :unfavorable-percentage="Number(12)"
-          :neutral-percentage="Number(25)"
-          :favorable-percentage="Number(63)"
-        />
-        <Separator class="mt-2" />
-        <DeltaRow
-          category="Efficiency"
-          :score="Number(8.8)"
-          :score-trend="Number(0.1)"
-          :unfavorable-trend="Number(0.1)"
-          :neutral-trend="Number(0.1)"
-          :favorable-trend="Number(0.1)"
-          :unfavorable-percentage="Number(5)"
-          :neutral-percentage="Number(18)"
-          :favorable-percentage="Number(77)"
-        />
+        <div v-for="result in results" :key="result.category">
+          <DeltaRow
+            :category="result.category"
+            :score="Number(result.score)"
+            :score-trend="Number(result.scoreTrend)"
+            :unfavorable-trend="Number(result.unfavorableTrend)"
+            :neutral-trend="Number(result.neutralTrend)"
+            :favorable-trend="Number(result.favorableTrend)"
+            :unfavorable-percentage="Number(result.unfavorablePercentage)"
+            :neutral-percentage="Number(result.neutralPercentage)"
+            :favorable-percentage="Number(result.favorablePercentage)"
+          />
+          <Separator class="mt-2" />
+        </div>
       </div>
     </CardContent>
   </Card>

@@ -1,9 +1,11 @@
 import nx from '@nx/eslint-plugin';
+import typescriptEslint from 'typescript-eslint';
 
 export default [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  ...typescriptEslint.configs.recommended,
   {
     ignores: [
       '**/dist',
@@ -26,6 +28,14 @@ export default [
               onlyDependOnLibsWithTags: ['*'],
             },
           ],
+        },
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
         },
       ],
     },
