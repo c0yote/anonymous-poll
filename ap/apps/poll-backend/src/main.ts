@@ -25,7 +25,7 @@ const start = async () => {
   app.get('/api/poll/:id', await getPollByIdEndpoint(pollService));
   app.get('/api/series/:id', await getSeriesByIdEndpoint(seriesService));
   app.post(
-    '/api/poll/:id/response',
+    '/api/submitForm',
     await submitPollResponseEndpoint(submissionService)
   );
   app.post('/api/poll', await createPollEndpoint(pollService));

@@ -29,6 +29,7 @@ export interface SubmissionResponseSchema {
 export interface SubmissionSchema {
   id: string;
   pollId: string;
+  submitterId: string;
   responses: SubmissionResponseSchema;
 }
 

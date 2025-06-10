@@ -7,8 +7,7 @@ export const submitPollResponseEndpoint = async (
   return async (req: Request, res: Response) => {
     try {
       const submission = await submissionService.submitPollResponse(
-        req.params.id,
-        req.body
+        req.body,
       );
       res.send(submission);
     } catch (error) {
