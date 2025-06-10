@@ -5,18 +5,19 @@
     "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
-    "lib": ["es2022"],
+    "lib": ["es2022", "DOM", "DOM.Iterable"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "noEmitOnError": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noImplicitOverride": true,
-    // "noImplicitReturns": true,
-    // "noUnusedLocals": true,
     "skipLibCheck": true,
     "strict": false,
     "target": "es2022",
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "baseUrl": ".",
+    "paths": {
+      "@ap/shared-types": ["shared-types/src/index.ts"]
+    }
   }
 }

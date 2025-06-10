@@ -3,8 +3,9 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 import DeltaCard from './DeltaCard.vue';
+import { DeltaResult } from '@ap/shared-types';
 
-const mockSeries = [
+const mockSeries: DeltaResult[] = [
   {
     category: 'Clarity',
     score: 8.5,
@@ -106,7 +107,7 @@ onMounted(async () => {
       {{ error }}
     </div>
     <div v-else>
-      <DeltaCard :results="mockResults" />
+      <DeltaCard :series="series" :results="mockResults" :polls="[]" />
     </div>
   </div>
 </template>

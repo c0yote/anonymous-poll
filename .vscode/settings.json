@@ -1,16 +1,34 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "typescript.tsserver.useSeparateSyntaxServer": true,
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.tsserver.log": "verbose",
+  "typescript.preferences.useAliasesForRenames": false,
+  "typescript.workspaceSymbols.scope": "allOpenProjects",
+  "typescript.tsdk": "./ap/node_modules/typescript/lib",
+  "vue.updateImportsOnFileMove.enabled": true,
+  "vue.autoInsert.dotValue": true,
+  "vue.autoInsert.parentheses": true,
+  "vue.complete.normalizeComponentImportName": true,
+  "vue.server.hybridMode": true,
+  "vue.server.maxFileSize": 20971520,
+  "vue.server.petiteVue.supportHtmlFile": false,
+  "vue.server.vitePress.supportMdFile": false
 }
