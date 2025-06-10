@@ -5,6 +5,19 @@ import { Poll } from '../models/poll.model.js';
 import { Submission } from '../models/submission.model.js';
 import { SubmissionService } from './submission.services.js';
 import { ulid } from 'ulid';
+import { z } from 'zod';
+
+export interface CreatePollOptions {
+  seriesId: string;
+  title: string;
+  description: string;
+}
+
+export const createPollSchema = z.object({
+  seriesId: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+});
 
 export class PollService {
   constructor(
@@ -12,10 +25,11 @@ export class PollService {
     private readonly submissionService: SubmissionService
   ) {}
 
-  async createPoll(poll: PollSchema): Promise<Poll> {
+  async createPoll(options: CreatePollOptions): Promise<Poll> {
     const newPoll = {
-      ...poll,
+      ...options,
       id: ulid(),
+      submissionIds: [],
     };
 
     await this.db.data.polls.push(newPoll);
