@@ -4,21 +4,13 @@ import CardHeader from '../../shared/CardHeader.vue';
 import CardTitle from '../../shared/CardTitle.vue';
 import CardDescription from '../../shared/CardDescription.vue';
 import CardContent from '../../shared/CardContent.vue';
-import axios from 'axios';
-import { ref } from 'vue';
 import DeltaRow from './DeltaRow.vue';
 import Separator from '../../shared/Separator.vue';
 import { DeltaResult } from '@ap/shared-types';
 
 const props = defineProps<{
-  series: any; // TODO: Get series type
   results: DeltaResult[];
-  polls: any[]; // TODO: Get poll type
 }>();
-
-const polls = ref(props.polls);
-const error = ref<string | null>(null);
-const loading = ref(false);
 </script>
 
 <template>
@@ -31,7 +23,11 @@ const loading = ref(false);
     </CardHeader>
     <CardContent>
       <div class="flex flex-col gap-2">
-        <div v-for="result in results" :key="result.category">
+        <div
+          v-for="result in results"
+          :key="result.category"
+          class="flex flex-col gap-2"
+        >
           <DeltaRow
             :category="result.category"
             :score="Number(result.score)"
