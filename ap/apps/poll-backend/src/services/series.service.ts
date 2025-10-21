@@ -1,5 +1,5 @@
 import { Low } from 'lowdb';
-import { Schema } from '../database.js';
+import { Schema, SeriesSchema } from '../database.js';
 import { Series } from '../models/series.model.js';
 import { RecordNotFoundError } from './errors.js';
 import { PollService } from './poll.service.js';
@@ -23,5 +23,13 @@ export class SeriesService {
       description: series.description,
       polls: await this.pollService.getPollsbySeriesId(series.id),
     };
+  }
+
+  async getAllSeries(): Promise<SeriesSchema[]> {
+    const allSeries = this.db.data.series;
+
+    console.log(allSeries);
+
+    return allSeries;
   }
 }

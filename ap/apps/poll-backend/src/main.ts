@@ -7,6 +7,7 @@ import { SeriesService } from './services/series.service.js';
 import { getSeriesByIdEndpoint } from './endpoints/get-series-by-id.endpoint.js';
 import { SubmissionService } from './services/submission.services.js';
 import { createPollEndpoint } from './endpoints/post-create-poll.endpoint.js';
+import { getAllSeries } from './endpoints/get-all-series.js';
 
 const host = process.env.HOST ?? '0.0.0.0';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -28,6 +29,7 @@ const start = async () => {
     '/api/submitForm',
     await submitPollResponseEndpoint(submissionService)
   );
+  app.get('/api/series', await getAllSeries(seriesService));
   app.post('/api/poll', await createPollEndpoint(pollService));
 
   app.listen(port, host, () => {
