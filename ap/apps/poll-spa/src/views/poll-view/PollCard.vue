@@ -30,15 +30,35 @@ defineProps<{
 }>();
 
 const route = useRoute();
+// This is weird use of min/max to get the error message to show up,
+// but it turns out more complicated than you'd think.
 const formSchema = toTypedSchema(
   z.object({
-    clarity: z.coerce.number().min(1).max(10).nullable(),
-    energy: z.coerce.number().min(1).max(10).nullable(),
-    psychologicalSafety: z.coerce.number().min(1).max(10).nullable(),
-    workLifeBalance: z.coerce.number().min(1).max(10).nullable(),
-    confidence: z.coerce.number().min(1).max(10).nullable(),
-    efficiency: z.coerce.number().min(1).max(10).nullable(),
-  }),
+    clarity: z.coerce
+      .number()
+      .min(1, 'Clarity is required.')
+      .max(10, 'Clarity is required.'),
+    energy: z.coerce
+      .number()
+      .min(1, 'Energy is required.')
+      .max(10, 'Energy is required.'),
+    psychologicalSafety: z.coerce
+      .number()
+      .min(1, 'Psychological safety is required.')
+      .max(10, 'Psychological safety is required.'),
+    workLifeBalance: z.coerce
+      .number()
+      .min(1, 'Work-life balance is required.')
+      .max(10, 'Work-life balance is required.'),
+    confidence: z.coerce
+      .number()
+      .min(1, 'Confidence is required.')
+      .max(10, 'Confidence is required.'),
+    efficiency: z.coerce
+      .number()
+      .min(1, 'Efficiency is required.')
+      .max(10, 'Efficiency is required.'),
+  })
 );
 
 const form = useForm({
@@ -55,18 +75,16 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {
-
-  const submitObject = {
-    submissionId :"firstSubmissionId-1234",
-    pollId : route.params.id,
-    ...values
+    const submitObject = {
+      submissionId: 'firstSubmissionId-1234',
+      pollId: route.params.id,
+      ...values,
+    };
+    const response = await axios.post(`/api/submitForm`, submitObject);
+    console.log('Submit form posted', response);
+  } catch (error) {
+    console.log('Error occcured while submitting the form', error);
   }
-  const response = await axios.post(`/api/submitForm`, submitObject);
-  console.log("Submit form posted", response)
-  } catch(error) {
-    console.log("Error occcured while submitting the form",error);
-  }
-
 });
 </script>
 
