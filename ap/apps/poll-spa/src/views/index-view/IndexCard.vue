@@ -9,13 +9,14 @@ import CardFooter from '../../shared/CardFooter.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { SeriesSchema } from '@ap/shared-types';
 
 const props = defineProps<{
-  series: any; // TODO: Get series type
-  polls: any[]; // TODO: Get poll type
+  series: SeriesSchema; // TODO: Get series type
+  pollIds: string[]; // TODO: Get poll type
 }>();
 
-const polls = ref(props.polls);
+const pollIds = ref(props.pollIds);
 const error = ref<string | null>(null);
 const loading = ref(false);
 
@@ -49,10 +50,14 @@ const onNewPoll = async () => {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle>Series: {{ series.name }}</CardTitle>
+        <RouterLink :to="`/series/${series.id}`">
+            <CardTitle>Series: {{ series.name }}</CardTitle>
+        </RouterLink>
+
+      
       <CardDescription>{{ series.description }}</CardDescription>
     </CardHeader>
-    <CardContent>
+    <!-- <CardContent>
       <div v-if="loading" class="text-center">Loading...</div>
       <div class="p-8" v-if="polls.length === 0">
         <p class="text-center text-muted-foreground text-sm">No polls yet...</p>
@@ -70,9 +75,9 @@ const onNewPoll = async () => {
       <div v-if="error" class="text-destructive text-sm py-2">
         {{ error }}
       </div>
-    </CardContent>
-    <CardFooter>
+    </CardContent> -->
+    <!-- <CardFooter>
       <Button @click="onNewPoll">New Poll</Button>
-    </CardFooter>
+    </CardFooter> -->
   </Card>
 </template>

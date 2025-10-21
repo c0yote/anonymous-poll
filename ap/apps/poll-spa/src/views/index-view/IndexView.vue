@@ -3,16 +3,17 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 import IndexCard from './IndexCard.vue';
+import { SeriesSchema } from '@ap/shared-types';
 
 const route = useRoute();
-const series = ref<{ title: string; description: string } | null>(null);
+const series = ref<SeriesSchema[] | null>(null);
 const loading = ref(true);
 const error = ref<string | null>(null);
 
 onMounted(async () => {
   console.log('wat');
   try {
-    const response = await axios.get(`/api/series/${route.params.id}`);
+    const response = await axios.get<SeriesSchema[]>(`/api/series`);
     console.log(response.data);
     series.value = response.data;
   } catch (err) {
@@ -35,8 +36,8 @@ onMounted(async () => {
     <div v-else-if="error" class="text-center text-destructive">
       {{ error }}
     </div>
-    <div v-else>
-      <IndexCard :key="series.id" :series="series" :polls="series.polls" />
+    <div v-for="serie of series" :key="serie.id">
+      <IndexCard :key="serie.id" :series="serie" :pollIds="serie.pollIds" />
     </div>
   </div>
 </template>
