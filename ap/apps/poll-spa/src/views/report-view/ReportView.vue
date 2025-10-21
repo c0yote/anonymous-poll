@@ -77,8 +77,53 @@ const mockSeries: DeltaResult[] = [
 const route = useRoute();
 const series = ref<{ title: string; description: string } | null>(null);
 const mockResults = ref<DeltaResult[]>(mockSeries);
+const results = ref<DeltaResult[]>([]);
 const loading = ref(true);
 const error = ref<string | null>(null);
+
+const calculateDeltaResults = (polls: Poll[]): DeltaResult[] => {
+  const categories = [
+    { key: 'clarity', label: 'Clarity' },
+    { key: 'energy', label: 'Energy' },
+    { key: 'psychologicalSafety', label: 'Psychological Safety' },
+    { key: 'workLifeBalance', label: 'Work-life Balance' },
+    { key: 'confidence', label: 'Confidence' },
+    { key: 'efficiency', label: 'Efficiency' }
+  ];
+
+  const allSubmissions = polls.flatMap(poll => poll.submissions);
+
+  return categories.map(category => {
+    const scores = allSubmissions.map(submission => submission.responses[category.key]);
+    const averageScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+
+    const unfavorableCount = scores.filter(score => score >= 1 && score <= 4).length;
+    const neutralCount = scores.filter(score => score >= 5 && score <= 7).length;
+    const favorableCount = scores.filter(score => score >= 8 && score <= 10).length;
+
+    const totalCount = scores.length;
+    const unfavorablePercentage = Math.round((unfavorableCount / totalCount) * 100);
+    const neutralPercentage = Math.round((neutralCount / totalCount) * 100);
+    const favorablePercentage = Math.round((favorableCount / totalCount) * 100);
+
+    const scoreTrend = 0;
+    const unfavorableTrend = 0;
+    const neutralTrend = 0;
+    const favorableTrend = 0;
+
+    return {
+      category: category.label,
+      score: Number(averageScore.toFixed(1)),
+      scoreTrend,
+      unfavorableTrend,
+      neutralTrend,
+      favorableTrend,
+      unfavorablePercentage,
+      neutralPercentage,
+      favorablePercentage,
+    };
+  });
+};
 
 onMounted(async () => {
   console.log('wat');
@@ -86,6 +131,8 @@ onMounted(async () => {
     const response = await axios.get(`/api/series/${route.params.id}`);
     console.log(response.data);
     series.value = response.data;
+    
+    results.value = calculateDeltaResults(response.data.polls);
   } catch (err) {
     console.dir(err);
     if (err.status === 404) {
@@ -107,7 +154,7 @@ onMounted(async () => {
       {{ error }}
     </div>
     <div v-else>
-      <DeltaCard :series="series" :results="mockResults" :polls="[]" />
+      <DeltaCard :series="series" :results="results" :polls="series?.polls || []" />
     </div>
   </div>
 </template>

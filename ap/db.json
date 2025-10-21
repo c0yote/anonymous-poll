@@ -1,5 +1,32 @@
 {
-  "submissions": [],
+  "submissions": [
+    {
+      "id": "01K84294W8J26NR9E4TEX6KK9F",
+      "pollId": "01K8428TRZD96D0P5XY47JP9BG",
+      "submitterId": "firstSubmissionId-1234",
+      "responses": {
+        "clarity": 10,
+        "energy": 10,
+        "psychologicalSafety": 10,
+        "workLifeBalance": 10,
+        "confidence": 10,
+        "efficiency": 10
+      }
+    },
+    {
+      "id": "01K842J8E7S5VJ8GMW8YMRB5DF",
+      "pollId": "01K8428TRZD96D0P5XY47JP9BG",
+      "submitterId": "firstSubmissionId-1234",
+      "responses": {
+        "clarity": 5,
+        "energy": 5,
+        "psychologicalSafety": 5,
+        "workLifeBalance": 5,
+        "confidence": 5,
+        "efficiency": 5
+      }
+    }
+  ],
   "series": [
     {
       "id": "0",
@@ -10,34 +37,11 @@
   ],
   "polls": [
     {
-      "title": "June 9, 2025 - Wolverines",
-      "description": "Retrospective poll for Wolverines on June 9, 2025",
       "seriesId": "0",
-      "id": "01JXBRSZA4GMSVD90JQCYYAGMX"
-    },
-    {
-      "title": "June 9, 2025 - Wolverines",
-      "description": "Retrospective poll for Wolverines on June 9, 2025",
-      "seriesId": "0",
-      "id": "01JXBRVXN8B4464V2N915D475B"
-    },
-    {
-      "title": "June 9, 2025 - Wolverines",
-      "description": "Retrospective poll for Wolverines on June 9, 2025",
-      "seriesId": "0",
-      "id": "01JXBRVZVBJYAH1X3QT47FA9K1"
-    },
-    {
-      "title": "June 9, 2025 - Wolverines",
-      "description": "Retrospective poll for Wolverines on June 9, 2025",
-      "seriesId": "0",
-      "id": "01JXBRXXKD9TPRX4GJEEPR6DFG"
-    },
-    {
-      "title": "June 9, 2025 - Wolverines",
-      "description": "Retrospective poll for Wolverines on June 9, 2025",
-      "seriesId": "0",
-      "id": "01JXBS32BBFD37V5Q1V2A8CTW0"
+      "title": "October 21, 2025 - Wolverines",
+      "description": "Retrospective poll for Wolverines on October 21, 2025",
+      "id": "01K8428TRZD96D0P5XY47JP9BG",
+      "submissionIds": []
     }
   ]
 }
