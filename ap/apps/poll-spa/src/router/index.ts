@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { IndexView } from '../views/index-view';
 import { PollView } from '../views/poll-view';
 import { SeriesView } from '../views/series-view';
 import { ReportView } from '../views/report-view';
@@ -6,6 +7,11 @@ import { ReportView } from '../views/report-view';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/',
+      name: 'index',
+      component: IndexView,
+    },
     {
       path: '/poll/:id',
       name: 'poll',

@@ -3,6 +3,18 @@ import { Schema, SeriesSchema } from '../database.js';
 import { Series } from '../models/series.model.js';
 import { RecordNotFoundError } from './errors.js';
 import { PollService } from './poll.service.js';
+import { z } from 'zod';
+import { ulid } from 'ulid';
+
+export interface CreateSeriesOptions {
+  title: string;
+  description: string;
+}
+
+export const createSeriesSchema = z.object({
+  title: z.string().min(1),
+  description: z.string().min(1),
+});
 
 export class SeriesService {
   constructor(
@@ -31,5 +43,21 @@ export class SeriesService {
     console.log(allSeries);
 
     return allSeries;
+  }
+
+  async createSeries(options: CreateSeriesOptions): Promise<Series> {
+    const newSeries: SeriesSchema = {
+      id: ulid(),
+      name: options.title,
+      description: options.description,
+      pollIds: []
+    }
+
+    this.db.data.series.push(newSeries);
+
+    await this.db.write();
+
+    return this.getSeriesById(newSeries.id);
+
   }
 }
