@@ -4,15 +4,14 @@ import { Series } from '../models/series.model.js';
 import { RecordNotFoundError } from './errors.js';
 import { PollService } from './poll.service.js';
 import { z } from 'zod';
+import { ulid } from 'ulid';
 
 export interface CreateSeriesOptions {
-  seriesId: string;
   title: string;
   description: string;
 }
 
 export const createSeriesSchema = z.object({
-  seriesId: z.string().min(1),
   title: z.string().min(1),
   description: z.string().min(1),
 });
@@ -48,7 +47,7 @@ export class SeriesService {
 
   async createSeries(options: CreateSeriesOptions): Promise<Series> {
     const newSeries: SeriesSchema = {
-      id: options.seriesId,
+      id: ulid(),
       name: options.title,
       description: options.description,
       pollIds: []
